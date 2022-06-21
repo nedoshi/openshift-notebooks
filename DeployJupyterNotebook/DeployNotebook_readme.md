@@ -14,17 +14,18 @@ You’ll be doing the majority of the labs using the OpenShift CLI, but you can 
 
 The Jupyter Project provides a number of images for notebooks on Docker Hub. These are:
 
-base-notebook
-r-notebook
-minimal-notebook
-scipy-notebook
-tensorflow-notebook
-datascience-notebook
-pyspark-notebook
-all-spark-notebook
+* base-notebook
+* r-notebook
+* minimal-notebook
+* scipy-notebook
+* tensorflow-notebook
+* datascience-notebook
+* pyspark-notebook
+* all-spark-notebook
+
 The GitHub repository used to create these is:
 
-https://github.com/jupyter/docker-stacks
+* https://github.com/jupyter/docker-stacks
 
 Building the Minimal Notebook
 -----------------------------
