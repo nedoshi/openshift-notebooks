@@ -2,12 +2,8 @@
 
 Pre-req - You already have an OpenShift cluster. The following guides through a step by step procedure in deploying Jupyter Notebook in OpenShift.
 
-## Introduction to the lab
-
-Now that we've successfully deployed our cluster, we can deploy our Jupyter notebook on it. This  will allow us to become more familiar with some of the features of OpenShift/Kubernetes.
-
 ### What will we do in this lab?
-In this lab, you’ll go through a set of tasks that will help you understand the concepts of deploying and using container based applications.
+In this lab, you’ll go through a set of tasks that will help you understand the concepts of deploying and using containers.
 
 Some of the things you’ll be going through:
 
