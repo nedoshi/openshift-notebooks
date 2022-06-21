@@ -1,6 +1,14 @@
 # How to deploy Jupyter Notebook #
 
-Pre-req - You already have an OpenShift cluster. The following guides through a step by step procedure in deploying Jupyter Notebook in OpenShift.
+## Prerequisites
+
+#### 1. A ROSA Cluster
+This lab will assume you have already provisioned a OpenShift cluster succesfully and are able to use it.  
+
+#### 2. OpenShift Command Line Interface
+Please see the [OpenShift Command Line section](/rosa/1-account_setup/#install-the-openshift-cli) for more information on installing.
+
+The following guides through a step by step procedure in deploying Jupyter Notebook in OpenShift.
 
 ### What will we do in this lab?
 In this lab, you’ll go through a set of tasks that will help you understand the concepts of deploying and using containers.
