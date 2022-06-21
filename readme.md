@@ -10,6 +10,9 @@ Red Hat provides the industry's leading hybrid cloud platform, Red Hat OpenShift
 **About Jupyter Notebook**
 The Jupyter Notebook is an open source web application that you can use to create and share documents that contain live code, any mathematical or statistical equations, visualizations, and text. Jupyter Notebook is well-suited for demonstrations of programming concepts and training. In a single window, we enter the inputs and generate outputs. It is a fundamental way of telling stories. Stories that describe the insights into the relevant data.  Jupyter Notebook is maintained by the people at Project Jupyter.
 
+Reference:
+
+OpenShift, being a Kubernetes distribution, you can use the [JupyterHub deployment method for Kubernetes created by the Jupyter project team](https://github.com/jupyter-on-openshift/jupyter-notebooks)
 
 https://medium.com/sfu-cspmp/moving-towards-containers-deployment-of-jupyter-notebook-using-openshift-e37696ec977
 
