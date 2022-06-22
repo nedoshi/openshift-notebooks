@@ -1,23 +1,70 @@
 # How to deploy Jupyter Notebook #
 
-Building the Minimal Notebook
------------------------------
+Retrieve the login command
+--------------------------
 
-Instead of using the pre-built version of the minimal notebook, you can build the minimal notebook from source code. You may want to do this where you need it to use a RHEL base image included with your OpenShift cluster, instead of CentOS. Do be aware though that certain third party system packages may not be available for RHEL if you need to extend the image. One known example of this is image/video processing libraries, which although they may be able to be added to a CentOS base image, do not work with RHEL.
+If you are not logged in via the CLI, [access your cluster via the web console](/rosa/6-access_cluster/#accessing-the-cluster-via-the-web-console), then click on the dropdown arrow next to your name in the top-right and select *Copy Login Command*.
 
-In order to build the minimal notebook image from source code in your OpenShift cluster use the command:
+![CLI Login](/images/3-cli-login.png)
+
+A new tab will open and select the authentication method you are using (in our case it's *github*)
+
+Click *Display Token*
+
+Copy the command under where it says "Log in with this token". Then go to your terminal and paste that command and press enter.  You will see a similar confirmation message if you successfully logged in.
+
+    oc login --token=RYhFlXXXXXXXXXXXX --server=https://api.osd4-demo.abc1.p1.openshiftapps.com:6443
+    Logged into "https://api.osd4-demo.abc1.p1.openshiftapps.com:6443" as "openshiftuser" using the token provided.
+
+    You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+
+Create new project
+------------------
+
+Create a new project called "notebook-demo" in your cluster by entering the following command:
+
+  ```
+  oc new-project notebook-demo
+  ```
+  You should receive the following response
+  
+    Now using project "notebook-demo" on server "https://api.aro.openshiftdemo.dev:6443".
+
+    You can add applications to this project with the 'new-app' command. For example, try:
+
+        oc new-app rails-postgresql-example
+
+    to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+      kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
+
+Equivalently you can also create this new project using the web console UI by clicking on "Projects" under "Home" on the left menu, and then click "Create Project" button on the right.
+
+![UI Create Project](/images/3-createnewproj.png)
+Importing the Minimal Notebook
+------------------------------
+
+A pre-built version of the minimal notebook which is based on CentOS, can be found at on quay.io at:
+
+* https://quay.io/organization/jupyteronopenshift
+
+The name of the latest build version of this image is:
+
+* quay.io/jupyteronopenshift/s2i-minimal-notebook-py36:latest
+
+Although this image could be imported into an OpenShift cluster using ``oc import-image``, it is recommended instead that you load it using the supplied image stream definition, using:
 
 ```
-oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyter-notebooks/master/build-configs/s2i-minimal-notebook.json
+oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyter-notebooks/master/image-streams/s2i-minimal-notebook.json
 ```
 
-This will create a build configuration in your OpenShift project to build the minimal notebook image using the Python 3.6 S2I builder included with your OpenShift cluster. You can watch the progress of the build by running:
+This is preferred, as it will create an image stream with tag corresponding to the Python version being used, with the underlying image reference referring to a specific version of the image on quay.io, rather than the latest build. This ensures that the version of the image doesn't change to a newer version of the image which you haven't tested.
 
-```
-oc logs --follow bc/s2i-minimal-notebook-py36
-```
+Once the image stream definition is loaded, the project it is loaded into should have the tagged image:
 
-A tagged image ``s2i-minimal-notebook:3.6`` should be created in your project. Since it uses the same image name as when loading the image using the image stream, referencing the image on quay.io, only do one or the other. Don't try to both load the image stream, and build the minimal notebook from source code.
+* s2i-minimal-notebook:3.6
 
 Deploying the Minimal Notebook
 ------------------------------

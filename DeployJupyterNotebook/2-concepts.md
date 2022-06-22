@@ -5,11 +5,9 @@
 Source-to-Image (S2I) is a toolkit and workflow for building reproducible container images from source code. S2I produces ready-to-run images by injecting source code into a container image and letting the container prepare that source code for execution. By creating self-assembling builder images, you can version and control your build environments exactly like you use container images to version your runtime environments.
 
   * [S2I Builds](https://github.com/openshift/source-to-image)
-  * [Creating Images](https://docs.openshift.com/container-platform/4.8/openshift_images/create-images.html)
+  * [Creating Images](https://docs.openshift.com/container-platform/4.10/openshift_images/create-images.html)
 
 #### How it works
-
-For a dynamic language like Ruby, the build-time and run-time environments are typically the same. Starting with a builder image that describes this environment - with Ruby, Bundler, Rake, Apache, GCC, and other packages needed to set up and run a Ruby application installed - source-to-image performs the following steps:
 
 1. Start a container from the builder image with the application source injected into a known directory
 
@@ -33,11 +31,11 @@ Dockerfiles are run without many of the normal operational controls of container
 ### Routes
 An OpenShift Route exposes a service at a host name, like www.example.com, so that external clients can reach it by name. When a Route object is created on OpenShift, it gets picked up by the built-in HAProxy load balancer in order to expose the requested service and make it externally available with the given configuration. You might be familiar with the Kubernetes Ingress object and might already be asking "what's the difference?". Red Hat created the concept of Route in order to fill this need and then contributed the design principles behind this to the community; which heavily influenced the Ingress design.  Though a Route does have some additional features as can be seen in the chart below.
 
-![routes vs ingress](images/2-routes_vs_ingress.png)
+![routes vs ingress](/images/2-routes_vs_ingress.png)
 
 > **NOTE:** DNS resolution for a host name is handled separately from routing; your administrator may have configured a cloud domain that will always correctly resolve to the router, or if using an unrelated host name you may need to modify its DNS records independently to resolve to the router.
 
-Also of note is that an individual route can override some defaults by providing specific configurations in its annotations.  See [route specific annotations](https://docs.openshift.com/container-platform/4.8/networking/routes/route-configuration.html#nw-route-specific-annotations_route-configuration) for more details.
+Also of note is that an individual route can override some defaults by providing specific configurations in its annotations.  See [route specific annotations](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html#nw-route-specific-annotations_route-configuration) for more details.
 
 ### ImageStreams
 An ImageStream stores a mapping of tags to images, metadata overrides that are applied when images are tagged in a stream, and an optional reference to a Docker image repository on a registry.
@@ -51,8 +49,8 @@ You can also use ImageStreams in conjunction with DeploymentConfigs to set a tri
 See below for more details: 
 
 * [Image Streams Blog post](https://blog.openshift.com/image-streams-faq/)
-* [OpenShift Docs - Understanding containers, images, and image streams](https://docs.openshift.com/container-platform/4.8/openshift_images/images-understand.html)
-* [ImageStream and Builds](https://cloudowski.com/articles/why-managing-container-images-on-openshift-is-better-than-on-kubernetes/)
+* [OpenShift Docs - Understanding containers, images, and image streams](https://docs.openshift.com/container-platform/4.10/openshift_images/images-understand.html)
+
 
 
 ### Builds
@@ -62,4 +60,4 @@ OpenShift Container Platform leverages Kubernetes by creating Docker-formatted c
 
 Build objects share common characteristics: inputs for a build, the need to complete a build process, logging the build process, publishing resources from successful builds, and publishing the final status of the build. Builds take advantage of resource restrictions, specifying limitations on resources such as CPU usage, memory usage, and build or pod execution time.
 
-See [Understanding image builds](https://docs.openshift.com/container-platform/4.8/cicd/builds/understanding-image-builds.html) for more details.
+See [Understanding image builds](https://docs.openshift.com/container-platform/4.10/cicd/builds/understanding-image-builds.html) for more details.
